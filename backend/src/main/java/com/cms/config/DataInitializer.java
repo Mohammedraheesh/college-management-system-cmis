@@ -158,6 +158,60 @@ public class DataInitializer implements CommandLineRunner {
         studentRepository.save(charlie);
         System.out.println("✔ Created Student: Charlie Davis (charlie.student@college.edu / password123)");
 
+        // Student D: David Miller
+        User davidUser = User.builder()
+                .email("david.student@college.edu")
+                .passwordHash(passwordEncoder.encode("password123"))
+                .role(Role.ROLE_STUDENT)
+                .build();
+        userRepository.save(davidUser);
+
+        Student david = Student.builder()
+                .name("David Miller")
+                .email("david.student@college.edu")
+                .department("Computer Science & Engineering")
+                .year(2)
+                .user(davidUser)
+                .build();
+        studentRepository.save(david);
+        System.out.println("✔ Created Student: David Miller (david.student@college.edu / password123)");
+
+        // Student E: Emma Wilson
+        User emmaUser = User.builder()
+                .email("emma.student@college.edu")
+                .passwordHash(passwordEncoder.encode("password123"))
+                .role(Role.ROLE_STUDENT)
+                .build();
+        userRepository.save(emmaUser);
+
+        Student emma = Student.builder()
+                .name("Emma Wilson")
+                .email("emma.student@college.edu")
+                .department("Computer Science & Engineering")
+                .year(4)
+                .user(emmaUser)
+                .build();
+        studentRepository.save(emma);
+        System.out.println("✔ Created Student: Emma Wilson (emma.student@college.edu / password123)");
+
+        // Student F: Frank Thomas
+        User frankUser = User.builder()
+                .email("frank.student@college.edu")
+                .passwordHash(passwordEncoder.encode("password123"))
+                .role(Role.ROLE_STUDENT)
+                .build();
+        userRepository.save(frankUser);
+
+        Student frank = Student.builder()
+                .name("Frank Thomas")
+                .email("frank.student@college.edu")
+                .department("Electronics & Communication")
+                .year(3)
+                .user(frankUser)
+                .build();
+        studentRepository.save(frank);
+        System.out.println("✔ Created Student: Frank Thomas (frank.student@college.edu / password123)");
+
         // 4. Create Fee Statements
         Fee aliceFee = Fee.builder()
                 .student(alice)
@@ -180,8 +234,29 @@ public class DataInitializer implements CommandLineRunner {
                 .dueDate(LocalDate.now().plusWeeks(3))
                 .build();
 
-        feeRepository.saveAll(List.of(aliceFee, bobFee, charlieFee));
-        System.out.println("✔ Created 3 Fee Statements");
+        Fee davidFee = Fee.builder()
+                .student(david)
+                .totalFee(new BigDecimal("5000.00"))
+                .amountPaid(new BigDecimal("5000.00"))
+                .dueDate(LocalDate.now().plusMonths(3))
+                .build();
+
+        Fee emmaFee = Fee.builder()
+                .student(emma)
+                .totalFee(new BigDecimal("5500.00"))
+                .amountPaid(new BigDecimal("4000.00"))
+                .dueDate(LocalDate.now().plusMonths(2))
+                .build();
+
+        Fee frankFee = Fee.builder()
+                .student(frank)
+                .totalFee(new BigDecimal("6000.00"))
+                .amountPaid(new BigDecimal("2500.00"))
+                .dueDate(LocalDate.now().plusWeeks(2))
+                .build();
+
+        feeRepository.saveAll(List.of(aliceFee, bobFee, charlieFee, davidFee, emmaFee, frankFee));
+        System.out.println("✔ Created 6 Fee Statements");
 
         // 5. Create Academic Marks
         
@@ -230,8 +305,60 @@ public class DataInitializer implements CommandLineRunner {
                 .endExamMarks(51.0)
                 .build();
 
-        markRepository.saveAll(List.of(aliceMark1, aliceMark2, aliceMark3, bobMark1, bobMark2, charlieMark1));
-        System.out.println("✔ Created 6 Academic Mark Records");
+        // David Marks
+        Mark davidMark1 = Mark.builder()
+                .student(david)
+                .course(cs101)
+                .internalMarks(22.0)
+                .endExamMarks(45.0)
+                .build();
+
+        Mark davidMark2 = Mark.builder()
+                .student(david)
+                .course(cs202)
+                .internalMarks(26.0)
+                .endExamMarks(50.0)
+                .build();
+
+        // Emma Marks
+        Mark emmaMark1 = Mark.builder()
+                .student(emma)
+                .course(cs301)
+                .internalMarks(28.0)
+                .endExamMarks(61.0)
+                .build();
+
+        Mark emmaMark2 = Mark.builder()
+                .student(emma)
+                .course(cs202)
+                .internalMarks(27.5)
+                .endExamMarks(59.0)
+                .build();
+
+        // Frank Marks
+        Mark frankMark1 = Mark.builder()
+                .student(frank)
+                .course(ec201)
+                .internalMarks(18.0)
+                .endExamMarks(35.0)
+                .build();
+
+        Mark frankMark2 = Mark.builder()
+                .student(frank)
+                .course(ec302)
+                .internalMarks(21.5)
+                .endExamMarks(42.0)
+                .build();
+
+        markRepository.saveAll(List.of(
+                aliceMark1, aliceMark2, aliceMark3, 
+                bobMark1, bobMark2, 
+                charlieMark1, 
+                davidMark1, davidMark2, 
+                emmaMark1, emmaMark2, 
+                frankMark1, frankMark2
+        ));
+        System.out.println("✔ Created 12 Academic Mark Records");
         System.out.println("=========================================================");
     }
 }

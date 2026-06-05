@@ -30,18 +30,20 @@ Write-Host "-----------------------------------------------------------------" -
 Write-Host "H2 JDBC URL: jdbc:h2:mem:cmisdb (User: sa, Password: password)"
 Write-Host "-----------------------------------------------------------------" -ForegroundColor Gray
 Write-Host "🔑 PRE-SEEDED TEST ACCOUNTS (Ready to use!):" -ForegroundColor Cyan
-Write-Host "  1. Administrator Account:" -ForegroundColor White
-Write-Host "     - Email:    admin@college.com" -ForegroundColor Green
-Write-Host "     - Password: admin123" -ForegroundColor Green
-Write-Host "  2. Student Account (Alice Johnson - CS Year 3):" -ForegroundColor White
-Write-Host "     - Email:    alice.student@college.edu" -ForegroundColor Green
-Write-Host "     - Password: password123" -ForegroundColor Green
-Write-Host "  3. Student Account (Bob Smith - EC Year 2):" -ForegroundColor White
-Write-Host "     - Email:    bob.student@college.edu" -ForegroundColor Green
-Write-Host "     - Password: password123" -ForegroundColor Green
-Write-Host "  4. Student Account (Charlie Davis - CS Year 1):" -ForegroundColor White
-Write-Host "     - Email:    charlie.student@college.edu" -ForegroundColor Green
-Write-Host "     - Password: password123" -ForegroundColor Green
+Write-Host "  - Administrator Account:" -ForegroundColor White
+Write-Host "    Email: admin@college.com / Password: admin123" -ForegroundColor Green
+Write-Host "  - Student Alice Johnson (CS Year 3):" -ForegroundColor White
+Write-Host "    Email: alice.student@college.edu / Password: password123" -ForegroundColor Green
+Write-Host "  - Student Bob Smith (EC Year 2):" -ForegroundColor White
+Write-Host "    Email: bob.student@college.edu / Password: password123" -ForegroundColor Green
+Write-Host "  - Student Charlie Davis (CS Year 1):" -ForegroundColor White
+Write-Host "    Email: charlie.student@college.edu / Password: password123" -ForegroundColor Green
+Write-Host "  - Student David Miller (CS Year 2):" -ForegroundColor White
+Write-Host "    Email: david.student@college.edu / Password: password123" -ForegroundColor Green
+Write-Host "  - Student Emma Wilson (CS Year 4):" -ForegroundColor White
+Write-Host "    Email: emma.student@college.edu / Password: password123" -ForegroundColor Green
+Write-Host "  - Student Frank Thomas (EC Year 3):" -ForegroundColor White
+Write-Host "    Email: frank.student@college.edu / Password: password123" -ForegroundColor Green
 Write-Host "-----------------------------------------------------------------" -ForegroundColor Gray
 Write-Host "You can also register any new account on the Register page:"
 Write-Host "  - Emails containing 'admin' will get full Admin CRUD rights."
