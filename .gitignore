@@ -1,0 +1,28 @@
+# Maven / Spring Boot
+**/target/
+**/*.jar
+**/*.war
+
+# Node / React
+**/node_modules/
+**/dist/
+**/.tmp/
+**/.env
+**/*.log
+
+# Portable Maven Binary Folder (Downloaded local helper)
+apache-maven-3.8.8/
+
+# IDE Configs
+.idea/
+*.iml
+.vscode/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Miscellaneous
+.DS_Store
+Thumbs.db
+ehthumbs.db

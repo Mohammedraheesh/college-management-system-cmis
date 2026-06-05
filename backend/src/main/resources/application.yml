@@ -1,0 +1,92 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: cmis
+  profiles:
+    active: dev # Use dev profile by default (which uses H2 or local DB)
+
+  # Common JPA / Hibernate settings
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Logging configurations using SLF4J + Logback
+logging:
+  level:
+    root: INFO
+    com.cms: DEBUG
+    org.springframework.security: INFO
+    org.hibernate.SQL: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# Custom JWT configuration properties
+jwt:
+  # HS256 requires a secret key of at least 256 bits (32 bytes).
+  # Below is a hex-encoded key.
+  secret: "9a4f2c8d3e7b1a5c8e9d0f1a2b3c4d5e6f7g8h9i0j1k2l3m4n5o6p7q8r9s0t1u"
+  expiration-ms: 3600000 # 1 hour (configurable)
+
+---
+# ----------------------------------------------------
+# DEV PROFILE (Local H2 In-Memory Database)
+# ----------------------------------------------------
+spring:
+  config:
+    activate:
+      on-profile: dev
+  datasource:
+    url: jdbc:h2:mem:cmisdb;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: password
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+
+---
+# ----------------------------------------------------
+# PROD PROFILE (Docker / PostgreSQL / Cloud Databases)
+# ----------------------------------------------------
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    # Docker postgres container URL
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:cmis}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  # ====================================================
+  # CLOUD CONFIGURATION PLACEHOLDERS (AWS RDS / Azure SQL)
+  # ====================================================
+  # To connect to AWS RDS (PostgreSQL) or Azure SQL Database, swap the configuration properties:
+  #
+  # AWS RDS PostgreSQL:
+  #   url: jdbc:postgresql://cmis-db-instance.xxxxxx.us-east-1.rds.amazonaws.com:5432/cmis
+  #   username: rds_master_username
+  #   password: rds_master_password
+  #
+  # Azure SQL Database:
+  #   url: jdbc:sqlserver://cmis-server.database.windows.net:1433;database=cmis;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;
+  #   username: azure_admin_user@cmis-server
+  #   password: azure_admin_password
+  #   driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+  #   jpa:
+  #     database-platform: org.hibernate.dialect.SQLServerDialect
+  # ====================================================
